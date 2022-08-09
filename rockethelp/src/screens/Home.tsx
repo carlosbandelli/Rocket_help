@@ -1,9 +1,10 @@
-import { HStack, IconButton, VStack, useTheme, Text, Heading, FlatList } from 'native-base';
+import { HStack, IconButton, VStack, useTheme, Text, Heading, FlatList, Center } from 'native-base';
 import Logo from '../assets/logo_secondary.svg';
 import { Filter } from '../components/Filter'
+import { Button } from '../components/Button'
 import { Order, OrderProps } from '../components/Order';
 import React,{ useState } from 'react';
-import { SignOut } from 'phosphor-react-native';
+import { ChatTeardropText, SignOut } from 'phosphor-react-native';
 
 export function Home() {
     const [statusSelected, setStatusSelected] = useState<'open' | 'closed'>('open');
@@ -64,7 +65,19 @@ export function Home() {
             data={orders}
             keyExtractor={item => item.id}
             renderItem={({ item }) => <Order data={item}/>}
+            showsVerticalScrollIndicator={false}
+            contentContainerStyle={{ paddingBottom: 100 }}
+            ListEmptyComponent={() => (
+                <Center>
+                    <ChatTeardropText color={colors.gray[300]} size={40} />
+                    <Text color="gray.300" fontSize='xl' mt={6} textAlign="center">
+                        Você ainda não possui {'\n'}
+                        solicitações {statusSelected === 'open' ? 'em aberto' : 'finalizadas'}
+                    </Text>
+                </Center>
+            )}
             />
+            <Button title="Nova solicitação"/>
         </VStack>
     </VStack>
   );
