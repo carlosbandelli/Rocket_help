@@ -3,12 +3,13 @@ import { createNativeStackNavigator } from '@react-navigation/native-stack'
 import { Home } from '../screens/Home'
 import { Details } from '../screens/Details'
 import { Register } from '../screens/Register'
+import React from 'react'
 
 const {Navigator, Screen} = createNativeStackNavigator()
 
 export function AppRoutes() {
     return (
-        <Navigator>
+        <Navigator screenOptions={{ headerShown: false }}>
             <Screen name="Home" component={Home}/>
             <Screen name="new" component={Register}/>
             <Screen name="details" component={Details}/>
